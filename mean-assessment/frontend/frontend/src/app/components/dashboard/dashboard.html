@@ -1,0 +1,39 @@
+<div class="container">
+
+  <h1>Welcome to Product Management System</h1>
+
+  <h2>Weather Dashboard</h2>
+
+  <p *ngIf="loading">
+    Loading weather information...
+  </p>
+
+  <p *ngIf="errorMessage">
+    {{ errorMessage }}
+  </p>
+
+  <div *ngIf="weather">
+
+    <h3>Current Weather</h3>
+
+    <h1>
+      {{ weather.temperature_2m }} °C
+    </h1>
+
+    <p>
+      Humidity:
+      {{ weather.relative_humidity_2m }}%
+    </p>
+
+    <p>
+      Wind Speed:
+      {{ weather.wind_speed_10m }} km/h
+    </p>
+
+    <button (click)="loadWeather()">
+      Refresh Weather
+    </button>
+
+  </div>
+
+</div>
