@@ -3,10 +3,10 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="brand">
-      <span class="brand-icon">📦</span>
+    <!-- <div class="brand">
+      <span class="brand-icon">&#x1F4E6;</span>
       Product Management System
-    </div>
+    </div> -->
 
     <div class="nav-links">
       <a routerLink="/dashboard" routerLinkActive="active">
@@ -17,9 +17,9 @@
         Products
       </a>
 
-      <a routerLink="/orders" routerLinkActive="active">
+      <!-- <a routerLink="/orders" routerLinkActive="active">
         Orders
-      </a>
+      </a> -->
     </div>
 
     <button class="logout-btn" (click)="logout()">
@@ -39,18 +39,18 @@
     <div class="quick-cards">
 
       <div class="quick-card" routerLink="/products">
-        <div class="card-icon">📦</div>
+        <div class="card-icon">&#x1F4E6;</div>
         <h3>Products</h3>
         <p>Manage your product inventory</p>
         <span>View Products →</span>
       </div>
 
-      <div class="quick-card" routerLink="/orders">
+      <!-- <div class="quick-card" routerLink="/orders">
         <div class="card-icon">🛒</div>
         <h3>Orders</h3>
         <p>Manage customer orders</p>
         <span>View Orders →</span>
-      </div>
+      </div> -->
 
     </div>
 
@@ -81,7 +81,7 @@
       <div class="weather-card" *ngIf="weather() as weather">
 
         <div class="temperature">
-          <span class="weather-icon">☀️</span>
+          <span class="weather-icon">&#x2600;&#xFE0F;</span>
           <h1>{{ weather.temperature_2m }} °C</h1>
           <p>Current Temperature</p>
         </div>
@@ -89,7 +89,7 @@
         <div class="weather-details">
 
           <div class="weather-item">
-            <span>💧</span>
+            <span>&#x1F4A7;</span>
             <div>
               <h3>{{ weather.relative_humidity_2m }}%</h3>
               <p>Humidity</p>
@@ -97,7 +97,7 @@
           </div>
 
           <div class="weather-item">
-            <span>💨</span>
+            <span>&#x1F4A8;</span>
             <div>
               <h3>{{ weather.wind_speed_10m }} km/h</h3>
               <p>Wind Speed</p>

@@ -5,12 +5,15 @@ import { Router, RouterModule } from '@angular/router';
 
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './product-list.html'
+  templateUrl: './product-list.html',
+  styleUrl: './product-list.css'
+
 })
 export class ProductListComponent implements OnInit {
 products = signal<Product[]>([]);
@@ -19,7 +22,8 @@ errorMessage = signal('');
 
   constructor(
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private authService : AuthService
   ) {}
 
   ngOnInit(): void {
@@ -70,4 +74,9 @@ loadProducts(): void {
       }
     });
   }
+
+  logout() {
+  this.authService.logout();
+  this.router.navigate(['/login']);
+}
 }
