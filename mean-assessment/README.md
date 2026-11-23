@@ -1,9 +1,4 @@
-# Angular Interview Test -- MEAN Stack Application
-
-A full-stack application developed as part of the Angular Interview
-Test. The application uses **Angular** for the frontend, **Node.js and
-Express** for the backend, **MongoDB** for product and order data, and
-**MySQL** for user account management.
+# MEAN Stack Application
 
 ## Features
 
