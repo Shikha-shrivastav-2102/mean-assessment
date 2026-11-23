@@ -1,39 +1,115 @@
-<div class="container">
 
-  <h1>Welcome to Product Management System</h1>
+<div class="dashboard-container">
 
-  <h2>Weather Dashboard</h2>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="brand">
+      <span class="brand-icon">📦</span>
+      Product Management System
+    </div>
 
-  <p *ngIf="loading">
-    Loading weather information...
-  </p>
+    <div class="nav-links">
+      <a routerLink="/dashboard" routerLinkActive="active">
+        Dashboard
+      </a>
 
-  <p *ngIf="errorMessage">
-    {{ errorMessage }}
-  </p>
+      <a routerLink="/products" routerLinkActive="active">
+        Products
+      </a>
 
-  <div *ngIf="weather">
+      <a routerLink="/orders" routerLinkActive="active">
+        Orders
+      </a>
+    </div>
 
-    <h3>Current Weather</h3>
-
-    <h1>
-      {{ weather.temperature_2m }} °C
-    </h1>
-
-    <p>
-      Humidity:
-      {{ weather.relative_humidity_2m }}%
-    </p>
-
-    <p>
-      Wind Speed:
-      {{ weather.wind_speed_10m }} km/h
-    </p>
-
-    <button (click)="loadWeather()">
-      Refresh Weather
+    <button class="logout-btn" (click)="logout()">
+      Logout
     </button>
+  </nav>
 
-  </div>
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="welcome-section">
+      <h1>Welcome to Product Management System</h1>
+      <p>Manage your products and orders from one place.</p>
+    </div>
+
+    <!-- Quick Navigation Cards -->
+    <div class="quick-cards">
+
+      <div class="quick-card" routerLink="/products">
+        <div class="card-icon">📦</div>
+        <h3>Products</h3>
+        <p>Manage your product inventory</p>
+        <span>View Products →</span>
+      </div>
+
+      <div class="quick-card" routerLink="/orders">
+        <div class="card-icon">🛒</div>
+        <h3>Orders</h3>
+        <p>Manage customer orders</p>
+        <span>View Orders →</span>
+      </div>
+
+    </div>
+
+    <!-- Weather Dashboard -->
+    <section class="weather-section">
+
+      <div class="section-heading">
+        <div>
+          <h2>Weather Dashboard</h2>
+          <p>Current weather information</p>
+        </div>
+
+        <button class="refresh-btn"
+                (click)="loadWeather()"
+                [disabled]="loading()">
+          {{ loading() ? 'Refreshing...' : '↻ Refresh Weather' }}
+        </button>
+      </div>
+
+      <p class="loading" *ngIf="loading()">
+        Loading weather information...
+      </p>
+
+      <p class="error" *ngIf="errorMessage()">
+        {{ errorMessage() }}
+      </p>
+
+      <div class="weather-card" *ngIf="weather() as weather">
+
+        <div class="temperature">
+          <span class="weather-icon">☀️</span>
+          <h1>{{ weather.temperature_2m }} °C</h1>
+          <p>Current Temperature</p>
+        </div>
+
+        <div class="weather-details">
+
+          <div class="weather-item">
+            <span>💧</span>
+            <div>
+              <h3>{{ weather.relative_humidity_2m }}%</h3>
+              <p>Humidity</p>
+            </div>
+          </div>
+
+          <div class="weather-item">
+            <span>💨</span>
+            <div>
+              <h3>{{ weather.wind_speed_10m }} km/h</h3>
+              <p>Wind Speed</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
 
 </div>

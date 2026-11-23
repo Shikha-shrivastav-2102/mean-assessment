@@ -1,47 +1,56 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router, RouterModule } from '@angular/router';
 
 import { WeatherService } from '../../services/weather.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './dashboard.html'
+  imports: [CommonModule, RouterModule],
+  templateUrl: './dashboard.html',
+    styleUrl: './dashboard.css'
+
 })
 export class DashboardComponent implements OnInit {
 
-  weather: any = null;
+weather = signal<any>(null);
 
-  loading = false;
+loading = signal(false);
 
-  errorMessage = '';
-
+errorMessage = signal('');
   constructor(
-    private weatherService: WeatherService
+    private weatherService: WeatherService,
+    private authService : AuthService,
+private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadWeather();
   }
 
-  loadWeather(): void {
+loadWeather(): void {
 
-    this.loading = true;
-    this.errorMessage = '';
+  this.loading.set(true);
+  this.errorMessage.set('');
 
-    this.weatherService.getWeather().subscribe({
+  this.weatherService.getWeather().subscribe({
 
-      next: (response) => {
-        this.weather = response.current;
-        this.loading = false;
-      },
+    next: (response) => {
+      this.weather.set(response.current);
+      this.loading.set(false);
+    },
 
-      error: () => {
-        this.errorMessage = 'Unable to fetch weather data';
-        this.loading = false;
-      }
+    error: () => {
+      this.errorMessage.set('Unable to fetch weather data');
+      this.loading.set(false);
+    }
 
-    });
-  }
+  });
+}
+logout() {
+  this.authService.logout();
+  this.router.navigate(['/login']);
+}
 }

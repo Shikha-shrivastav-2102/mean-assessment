@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
@@ -13,10 +13,9 @@ import { Product } from '../../models/product';
   templateUrl: './product-list.html'
 })
 export class ProductListComponent implements OnInit {
-
-  products: Product[] = [];
-  loading = false;
-  errorMessage = '';
+products = signal<Product[]>([]);
+loading = signal(false);
+errorMessage = signal('');
 
   constructor(
     private productService: ProductService,
@@ -27,21 +26,25 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts(): void {
-    this.loading = true;
-    this.errorMessage = '';
+loadProducts(): void {
 
-    this.productService.getProducts().subscribe({
-      next: (response) => {
-        this.products = response.data;
-        this.loading = false;
-      },
-      error: () => {
-        this.errorMessage = 'Unable to load products';
-        this.loading = false;
-      }
-    });
-  }
+  this.loading.set(true);
+  this.errorMessage.set('');
+
+  this.productService.getProducts().subscribe({
+
+    next: (response) => {
+      this.products.set(response.data);
+      this.loading.set(false);
+    },
+
+    error: () => {
+      this.errorMessage.set('Unable to load products');
+      this.loading.set(false);
+    }
+
+  });
+}
 
   addProduct(): void {
     this.router.navigate(['/products/add']);

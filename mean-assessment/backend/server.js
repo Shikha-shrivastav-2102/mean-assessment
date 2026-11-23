@@ -8,6 +8,7 @@ const connectMongoDB = require('./config/mongodb');
 
 const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const db = require('./config/mysql');
 
 const app = express();
 

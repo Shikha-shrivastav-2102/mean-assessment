@@ -8,13 +8,13 @@
     </button>
   </div>
 
-  <p *ngIf="loading">Loading products...</p>
+  <p *ngIf="loading()">Loading products...</p>
 
-  <p *ngIf="errorMessage">
-    {{ errorMessage }}
+  <p *ngIf="errorMessage()">
+    {{ errorMessage() }}
   </p>
 
-  <table *ngIf="!loading && products.length > 0">
+  <table *ngIf="!loading() && products().length > 0">
 
     <thead>
       <tr>
@@ -27,7 +27,7 @@
 
     <tbody>
 
-      <tr *ngFor="let product of products">
+      <tr *ngFor="let product of products()">
 
         <td>{{ product.name }}</td>
 
@@ -51,7 +51,7 @@
 
   </table>
 
-  <p *ngIf="!loading && products.length === 0">
+  <p *ngIf="!loading() && products().length === 0">
     No products available.
   </p>
 
